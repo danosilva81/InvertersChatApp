@@ -18,7 +18,7 @@ namespace InvertersChatApp.BrokerBot
 
         public async Task<string> GetQuoteValue(string stockName)
         {
-            string result = "";
+            string result;
 
             string csvResult = await _brokerDataSource.GetCsvStockValues(stockName);
             var lines = csvResult.Split("\r\n");
@@ -26,13 +26,13 @@ namespace InvertersChatApp.BrokerBot
             {
                 var quoteValue = lines[1].Split(",")[6];
                 if (quoteValue != null && quoteValue.Trim() != "N/D")
-                    result = $"{stockName} quote is ${quoteValue} per share”";
+                    result = $"{stockName} quote is ${quoteValue} per share.";
                 else
                     result = $"The stock quote of '{stockName}' is not in our database."; ;
             }
             else
             {
-                result = "We had an error. Please, contact admins";
+                result = "We had an error. Please, contact admins.";
 
             }
 
