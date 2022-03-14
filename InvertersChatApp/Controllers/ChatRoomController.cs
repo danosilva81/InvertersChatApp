@@ -27,7 +27,7 @@ namespace InvertersChatApp.Controllers
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Name);
     
-            return View("Room", new ChatSession() { RoomSession = room, UserEmail = userEmail});
+            return View("Room", new ChatSession() { RoomSession = room, UserEmail = userEmail, NumberOfMessagesInRoom = 50});
         }
     }
 }

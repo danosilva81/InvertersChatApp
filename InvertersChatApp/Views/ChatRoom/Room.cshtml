@@ -54,9 +54,21 @@
             }
         });
 
+        var msgNumber = 0;
+        var messagesLimit = @Model.NumberOfMessagesInRoom;
+
         connection.on("ReceiveMessage", (user, message) => {
-            var message = "<div><b>" + user + ":</b> " + message + "</div>";
+            msgNumber++;
+
+            var message = "<div id='msgNumber_" + msgNumber + "'><b>" + user + ":</b> " + message + "</div>";
             $("#messages").prepend(message);
+            
+
+            if (msgNumber > messagesLimit)
+            {
+                var msgToRemove = msgNumber - messagesLimit;
+                $('#msgNumber_' + msgToRemove).remove();
+            }
         });
     </script>
 }

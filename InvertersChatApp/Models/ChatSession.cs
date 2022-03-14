@@ -10,5 +10,7 @@ namespace InvertersChatApp.Models
         public int RoomSession { get; set; }
 
         public string UserEmail { get; set; }
+
+        public int NumberOfMessagesInRoom { get; set; }
     }
 }
