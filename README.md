@@ -1,4 +1,4 @@
-# Broker Chat App	
+# Investors Chat App	
 This is a web application to access a Chat Rooms. Users can register and logged in to chat with other logged users and also asks of stock values through the same chat
 
 It was did it as a test exercise by [Software Engineer Daniel Silva Jiménez](https://www.linkedin.com/in/daniel-silva-jim%C3%A9nez-12871653)
