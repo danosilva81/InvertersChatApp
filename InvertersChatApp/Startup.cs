@@ -47,7 +47,8 @@ namespace InvertersChatApp
                 options.Password.RequiredUniqueChars = 1;
             });
 
-            services.AddSingleton<IBrokerQueryBot, StooqBrokerBot>();
+            services.AddSingleton<IBrokerDataSource, StooqWebDataSource>();
+            services.AddSingleton<IBrokerQueryBot, BrokerQueryBot>();
             services.AddControllersWithViews();
             services.AddSignalR(); 
         }

@@ -4,13 +4,13 @@
 
 <h1>@ChatRoomController.Rooms.GetValueOrDefault(Model.RoomSession)</h1>
 
-<div class="row">
-    <div class="col-12">
-        @*<input type="text" placeholder="user" id="user" />*@
-        <input type="text" placeholder="text" id="message" />
-        <button id="btnSend">Send</button>
+<div class="input-group mb-3" style="width:60%">
+    <input id="message" type="text" class="form-control" placeholder="Chat text" aria-label="Chat text" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button id="btnSend" class="btn btn-outline-primary" type="button">Send</button>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-6">
@@ -32,7 +32,7 @@
 
         $("#btnSend").on("click", function (event) {
             let room = "@Model.RoomSession";
-            let user = "@Model.UserEmail";  
+            let user = "@Model.UserEmail";
             let message = $("#message").val();
 
             connection.invoke("SendMessage", room, user, message)
@@ -42,6 +42,16 @@
             $("#message").focus();
 
             event.preventDefault();
+        });
+
+
+        $('#message').keypress(function (e) {
+            var key = e.which;
+            if (key == 13)  // the enter key code
+            {
+                $('#btnSend').click();
+                return false;
+            }
         });
 
         connection.on("ReceiveMessage", (user, message) => {
