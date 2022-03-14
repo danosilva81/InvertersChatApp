@@ -1,0 +1,13 @@
+﻿@using InvertersChatApp.Controllers;
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <h2>Chat Rooms</h2>
+        <ul class="list-group">
+            @foreach (var item in ChatRoomController.Rooms)
+            {
+                <li class="list-group-item"><a href="~/ChatRoom/Room?room=@item.Key">@item.Value</a></li>
+            }
+        </ul>
+    </div>
+</div>

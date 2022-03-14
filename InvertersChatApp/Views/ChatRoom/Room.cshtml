@@ -1,0 +1,52 @@
+﻿@model ChatSession
+
+@using InvertersChatApp.Controllers;
+
+<h1>@ChatRoomController.Rooms.GetValueOrDefault(Model.RoomSession)</h1>
+
+<div class="row">
+    <div class="col-12">
+        @*<input type="text" placeholder="user" id="user" />*@
+        <input type="text" placeholder="text" id="message" />
+        <button id="btnSend">Send</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <div id="messages"></div>
+    </div>
+    <div class="col-6"></div>
+</div>
+
+@section scripts {
+
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chat").build();
+
+        connection.start().then(() => {
+            connection.invoke("AddToGroup", "@Model.RoomSession")
+        }).catch((e) => console.error(e));
+
+        $("#btnSend").on("click", function (event) {
+            let room = "@Model.RoomSession";
+            let user = "@Model.UserEmail";     //$("#user").val();
+            let message = $("#message").val();
+
+            connection.invoke("SendMessage", room, user, message)
+                .catch((e) => console.error(e));
+
+            $("#message").val("");
+            $("#message").focus();
+
+            event.preventDefault();
+        });
+
+        connection.on("ReceiveMessage", (user, message) => {
+            var message = "<div><b>" + user + ":</b> " + message + "</div>";
+            $("#messages").prepend(message);
+        });
+    </script>
+}
