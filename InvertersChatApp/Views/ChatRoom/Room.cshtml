@@ -32,7 +32,7 @@
 
         $("#btnSend").on("click", function (event) {
             let room = "@Model.RoomSession";
-            let user = "@Model.UserEmail";     //$("#user").val();
+            let user = "@Model.UserEmail";  
             let message = $("#message").val();
 
             connection.invoke("SendMessage", room, user, message)
